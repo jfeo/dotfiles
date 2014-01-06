@@ -1,0 +1,11 @@
+# General
+source /etc/zsh/general
+
+# Aliases
+source /etc/zsh/alias
+
+# Setting the prompt
+source /etc/zsh/prompt
+
+# Login
+source /etc/zsh/login

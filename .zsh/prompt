@@ -1,2 +1,2 @@
-PROMPT="%{$fg[green]%}[%{$fg[yellow]%}%n%{$fg[green]%}][%{$fg[blue]%}%m%{$fg[green]%}][%~]%{$reset_color%} "
-RPROMPT="%{$fg[green]%}[%{$fg[yellow]%}%?:%#%{$fg[green]%}]%{$reset_color%}"
+PROMPT="%{$fg[yellow]%}> %{$reset_color%}"
+RPROMPT="%{$fg[green]%}%~%{$reset_color%}"

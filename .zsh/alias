@@ -1,12 +1,12 @@
 # shortcuts
 
 alias ..='cd ../'
-alias pacs='sudo pacman -S'
-alias pacss='pacman -Ss'
-alias pacr='sudo pacman -R'
-alias pacrs='sudo pacman -Rs'
-alias pacsy='sudo pacman -Sy'
-alias pacsyu='sudo pacman -Syu'
+alias spac='sudo pacman -S'
+alias sspac='pacman -Ss'
+alias rpac='sudo pacman -R'
+alias rspac='sudo pacman -Rs'
+alias sypac='sudo pacman -Sy'
+alias syupac='sudo pacman -Syu'
 alias printm1='lpr -H print.diku.dk:631/ m1a'
 # modified commands
 alias grep='grep --color=auto'

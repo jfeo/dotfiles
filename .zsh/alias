@@ -7,7 +7,7 @@ alias rpac='sudo pacman -R'
 alias rspac='sudo pacman -Rs'
 alias sypac='sudo pacman -Sy'
 alias syupac='sudo pacman -Syu'
-alias printm1='lpr -H print.diku.dk:631/ m1a'
+alias printm1='lpr -H print.diku.dk:631/ m1b'
 # modified commands
 alias grep='grep --color=auto'
 alias halt='sudo shutdown -h now'

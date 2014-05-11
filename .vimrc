@@ -5,20 +5,30 @@
 set nocompatible              " be iMproved
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
-Bundle 'Raimondi/delimitMate'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-surround'
-Bundle 'ervandew/supertab'
-Bundle 'SirVer/ultisnips'
-Bundle 'scrooloose/syntastic'
-Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'tpope/vim-commentary'
+"Plugin 'tpope/vim-surround'
+"Plugin 'ervandew/supertab'
+"Plugin 'scrooloose/syntastic'
+Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
+"Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+call vundle#end()
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 "==================="
 "=== General ======="
@@ -43,14 +53,21 @@ set ruler             " enable column and line number display
 "======================="
 " reload .vimrc faster
 noremap <leader>so :so ~/.vimrc<cr>
+" run current window in a python2 or python3 shell
+noremap <leader>p3 :!python %:p<cr> 
+noremap <leader>p2 :!python2 %:p<cr>
+" split horizontal
+noremap <C-b> :split<cr>
+" split vertical
+noremap <C-v> :vs<cr>
 " close current window
-noremap <leader>cl :clo<cr>
-" run current window in a python3 shell
-noremap <leader>p3 :Shell python %:p<cr> 
-" buffer controls
-noremap <leader>bn :bn<cr>
-noremap <leader>bp :bp<cr>
-noremap <leader>bd :bd<cr>
+noremap <C-l> :clo<cr>
+" next buffer
+noremap <C-n> :bn<cr>
+" previous buffer
+noremap <C-p> :bp<cr>
+" delete buffer
+noremap <C-d> :bd<cr>
 
 "==================="
 "=== Other stuff ==="
@@ -62,29 +79,4 @@ let g:Tex_ViewRule_pdf        = "mupdf"
 "=== Functions ==="
 "================="
 
-" Run shell commands with output redirected to buffer window
-command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
 
-function! s:RunShellCommand(cmdline)
-  let isfirst = 1
-  let words = []
-  for word in split(a:cmdline)
-    if isfirst
-      let isfirst = 0  " don't change first word (shell command)
-    else
-      if word[0] =~ '\v[%#<]'
-        let word = expand(word)
-      endif
-      let word = shellescape(word, 1)
-    endif
-    call add(words, word)
-  endfor
-  let expanded_cmdline = join(words)
-  rightbelow new
-  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
-  call setline(1, 'You entered:  ' . a:cmdline)
-  call setline(2, 'Expanded to:  ' . expanded_cmdline)
-  call append(line('$'), substitute(getline(2), '.', '=', 'g'))
-  silent execute '$read !'. expanded_cmdline
-  1
-endfunction

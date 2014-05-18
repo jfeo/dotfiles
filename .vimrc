@@ -16,17 +16,17 @@ Plugin 'tpope/vim-commentary'
 "Plugin 'tpope/vim-surround'
 "Plugin 'ervandew/supertab'
 "Plugin 'scrooloose/syntastic'
-Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
+Plugin 'git://git.code.sf.indent/p/vim-latex/vim-latex'
 
-"Plugin 'SirVer/ultisnips'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+"Plugin 'Valloric/YouCompleteMe'
 
 " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+"Plugin 'honza/vim-snippets'
 
 call vundle#end()
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
@@ -57,9 +57,9 @@ noremap <leader>so :so ~/.vimrc<cr>
 noremap <leader>p3 :!python %:p<cr> 
 noremap <leader>p2 :!python2 %:p<cr>
 " split horizontal
-noremap <C-b> :split<cr>
+"noremap <C-b> :split<cr>
 " split vertical
-noremap <C-v> :vs<cr>
+"noremap <C-v> :vs<cr>
 " close current window
 noremap <C-l> :clo<cr>
 " next buffer

@@ -2,9 +2,9 @@
 URxvt*scrollBar:       false
 URxvt*scrollBar_right: false
 URxvt.font:	           xft:Terminus:pixelsize=14
-URxvt.boldFont:		   xft:Terminus:pixelsize=14:antialias=true:bold
+URxvt.boldFont:		     xft:Terminus:pixelsize=14:antialias=true:bold
 URxvt.italic:          xft:Terminus:pixelsize=14:antialias=true:italic
-URxvt*shading:         10
+URxvt*shading:         20
 URxvt*transparent:     true
 URxvt.background:      0000000
 URxvt.foreground:      #bbbbbb

@@ -16,7 +16,7 @@ set $barMod Mod1
 # STARTUP APPS #
 ################
 
-exec feh --bg-fill ~/walls/clouds.jpg &
+exec feh --bg-fill ~/pics/walls/howlscape.jpg &
 exec redshift -l 55.7:12.6 -t 5700:3600 -g 0.8 -m vidmode -v &
 
 ##############
@@ -24,14 +24,15 @@ exec redshift -l 55.7:12.6 -t 5700:3600 -g 0.8 -m vidmode -v &
 ##############
 
 ### font ###
-set $font -*-terminus-medium-r-*-*-14-*-*-*-*-*-iso10646-*
+#set $font -*-terminus-medium-r-*-*-14-*-*-*-*-*-iso10646-*
+#set $font Terminus-14:normal
 
-font $font
+#font $font
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
-# chose a FreeType font, such as:
-#font pango:Terminus 10
+# chose a FreeType font, 
+font pango:Convergence 14
 
 ### window style ###
 
@@ -40,11 +41,11 @@ new_float 1pixel
 
 ### colours ###
 
-# class			border	backgr.	text	indicator
-client.focused 		#404040	#404040	#bbbbbb	#FF4020
-client.focused_inactive	#202020 #202020 #bbbbbb #AF2010
-client.unfocused	#202020 #202020	#bbbbbb	#AF2010
-client.urgent		#FF4020 #FF4020 #bbbbbb #FF9000
+# class			            border	backgr.	text	  indicator
+client.focused          #404040	#606060	#bbbbbb	#2575EE
+client.focused_inactive	#202020 #202020 #bbbbbb #104090
+client.unfocused        #202020 #202020	#bbbbbb	#AF2010
+client.urgent           #FF4020 #FF4020 #bbbbbb #FFFF00
 
 #################
 # FUNCTIONALITY #
@@ -60,8 +61,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -nb \#101010 -nf \#bbbbbb -sb \#ff6040 -sf \#101010 -fn "Terminus-10"
-bindsym $mod+Shift+d exec dmenu_open
+bindsym $mod+d exec dmenu_run -h 23 -nb \#E9E9E9 -nf \#000000 -sb \#E9E9E9 -sf \#2575EE -fn "Convergence-14:normal"
+bindsym $mod+o exec dmenu_open
 
 # dmenu shutdown
 bindsym $mod+z exec dmenu_shutdown
@@ -72,7 +73,7 @@ bindsym $mod+z exec dmenu_shutdown
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # volume
-bindcode 121 exec amixer -c 0 sset Master toggle
+#bindcode 121 exec amixer -c 0 sset Master toggle
 bindcode 122 exec amixer -c 0 sset Master 5dB-
 bindcode 123 exec amixer -c 0 sset Master 5dB+
 
@@ -186,20 +187,23 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-#	mode hide
-	position top
-#	modifier $barMod
-        status_command i3status
+  #	mode hide
+  position top
+  #	modifier $barMod
+  # icon font
+  font pango:Convergence, Icons 14
+  #status_command i3status
+  status_command i3bashtus
 	colors {
-		background #101010
-		statusline #bbbbbb
-		separator  #404040
+		background #E9E9E9
+		statusline #000000
+		separator  #C4C4C4
 
-		# class			border	backgr.	text
-		focused_workspace	#FF4020 #404040	#bbbbbb
-		active_workspace	#AF2010 #404040 #bbbbbb
-		inactive_workspace	#AF2010 #202020 #bbbbbb
-		urgent_workspace	#AF2010 #A04020	#bbbbbb
+		# class            border  backgr. text
+		focused_workspace  #E9E9E9 #E9E9E9 #2575EE
+		active_workspace   #E9E9E9 #E9E9E9 #A0A0A0
+		inactive_workspace #E9E9E9 #E9E9E9 #A0A0A0
+		urgent_workspace   #E9E9E9 #E9E9E9 #CC4060
 	}
 }
 

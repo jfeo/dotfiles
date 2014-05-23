@@ -1,20 +1,13 @@
 # shortcuts
 alias ..='cd ../'
 
-alias spac='sudo pacman -S'
-alias sspac='pacman -Ss'
+alias spac='packer -S'
+alias sspac='packer -Ss'
 alias rpac='sudo pacman -R'
 alias rspac='sudo pacman -Rs'
 alias sypac='sudo pacman -Sy'
-alias syupac='sudo pacman -Syu'
-
-alias aur='yaourt'
-alias saur='yaourt -S'
-alias ssaur='yaourt -Ss'
-alias raur='yaourt -R'
-alias rsaur='yaourt -Rs'
-alias syaur='yaourt -Sy'
-alias syuaur='yaourt -Syu'
+alias syupac='packer -Syu'
+alias qlpac='pacman -Ql'
 
 alias printm1b='lpr -H print.diku.dk:631/version=1.1 -P m1b'
 

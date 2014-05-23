@@ -1,7 +1,7 @@
 HISTFILE=/tmp/histfile
 HISTSIZE=1000
 SAVEHIST=10000
-setopt beep
+
 bindkey -v
 
 zstyle :compinstall filename '/etc/zshrc'
@@ -11,12 +11,10 @@ compinit
 promptinit
 
 export EDITOR=vim
-export LANG="en_GB.UTF-8"
-export LANGUAGE="en_GB:en_US"
 
 # Setting path variable
 typeset -U path
-path=(/opt/mosml/bin:~/bin $path)
+path=($path /opt/mosml/bin /home/feo/bin)
 
 ## Keybindings
 #bindkey "\e[1~" beginning-of-line

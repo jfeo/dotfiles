@@ -1,3 +1,6 @@
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+
 setxkbmap dk &
 xrdb .Xresources
 
@@ -6,5 +9,5 @@ xset +fp /usr/share/fonts/local
 xset fp rehash
 
 # wm
-exec i3 -V >> ~/.i3/i3log 2>&1
-
+xterm &
+exec twm 

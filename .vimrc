@@ -54,6 +54,7 @@ set ruler             " enable column and line number display
 " reload .vimrc faster
 noremap <leader>so :so ~/.vimrc<cr>
 " run current window in a python2 or python3 shell
+noremap <leader>cl :!clear<cr><cr>
 noremap <leader>p3 :!python %:p<cr> 
 noremap <leader>p2 :!python2 %:p<cr>
 " split horizontal
@@ -73,7 +74,7 @@ noremap <C-d> :bd<cr>
 "=== Other stuff ==="
 "==================="
 let g:Tex_DefaultTargetFormat = "pdf"
-let g:Tex_ViewRule_pdf        = "mupdf"
+let g:Tex_ViewRule_pdf        = "evince"
 
 "================="
 "=== Functions ==="

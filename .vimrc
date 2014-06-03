@@ -17,12 +17,12 @@ Plugin 'tpope/vim-commentary'
 "Plugin 'ervandew/supertab'
 "Plugin 'scrooloose/syntastic'
 Plugin 'git://git.code.sf.indent/p/vim-latex/vim-latex'
-
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'SirVer/ultisnips'
 "Plugin 'Valloric/YouCompleteMe'
-
+Plugin 'junegunn/goyo.vim'
 " Snippets are separated from the engine. Add this if you want them:
-"Plugin 'honza/vim-snippets'
+Plugin 'honza/vim-snippets'
 
 call vundle#end()
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -37,7 +37,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
 filetype plugin indent on
 syntax enable
-colorscheme default   " colorscheme
+set background=light
+let g:solarized_termcolors=256
+colorscheme solarized " colorscheme
 set backspace=2       " delete newlines with backspace
 set expandtab         " indent with spaces
 set shiftwidth=2      " number of spaces to use when indenting
@@ -48,6 +50,9 @@ set foldenable        " enable folds
 set number            " enable line numbers
 set ruler             " enable column and line number display
 
+highlight OverLength ctermbg=blue ctermfg=white guibg=#592929
+"let columncolour OverLength /\%81v.\+/
+let &colorcolumn="80,".join(range(81,999),",")
 "======================="
 "=== Keymapping ========"
 "======================="
@@ -69,6 +74,11 @@ noremap <C-n> :bn<cr>
 noremap <C-p> :bp<cr>
 " delete buffer
 noremap <C-d> :bd<cr>
+" Goyo mode
+noremap <C-f> :Goyo<cr>
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 "==================="
 "=== Other stuff ==="
@@ -79,5 +89,13 @@ let g:Tex_ViewRule_pdf        = "evince"
 "================="
 "=== Functions ==="
 "================="
-
-
+function ToggleBackgroundColour ()
+   if (&background == 'light')
+      set background=dark
+      echo "background -> dark"
+   else
+      set background=light
+      echo "background -> light"
+   endif
+   colorscheme solarized
+endfunction

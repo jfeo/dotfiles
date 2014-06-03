@@ -12,7 +12,8 @@ alias qlpac='pacman -Ql'
 alias printm1b='lpr -H print.diku.dk:631/version=1.1 -P m1b'
 
 # modified commands
-alias grep='grep --color=auto'
+alias grep='grep --color=always'
 alias halt='systemctl poweroff'
 alias reboot='systemctl reboot'
-alias ls='ls --color'
+alias ls='ls --color=always'
+alias less='less -R'

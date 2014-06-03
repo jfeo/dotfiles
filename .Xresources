@@ -9,10 +9,20 @@ URxvt*transparent:     true
 URxvt.background:      0000000
 URxvt.foreground:      #bbbbbb
 
+! home and end keys
+URxvt*keysym.Home: \033[1~
+URxvt*keysym.End: \033[4~
+
+
 ! cursor
 Xcursor.theme:      Vanilla-DMZ
 Xcursor.theme_core: true
 Xcursor.size:       0
+
+! coloured man pages
+URxvt.colorIT:      #87af5f
+URxvt.colorBD:      #d7d7d7
+URxvt.colorUL:      #87afd7
 
 ! black
 *color0:        #000000

@@ -24,5 +24,7 @@ xset -b
 xset +fp /usr/share/fonts/local
 xset fp rehash
 
+export GTK2_RC_FILES=$HOME/.gtkrc-2.0
+
 # wm
 exec i3 -V >> ~/.i3/i3log 2>&1

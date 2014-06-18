@@ -1,4 +1,4 @@
-HISTFILE=/tmp/histfile
+HISTFILE=/home/$USER/.cache/zsh_histfile
 HISTSIZE=1000
 SAVEHIST=10000
 
@@ -43,3 +43,7 @@ bindkey "\e[7~" beginning-of-line
 #bindkey "\e[F" end-of-line
 ## completion in the middle of a line
 #bindkey '^i' expand-or-complete-prefix
+
+manpdf(){
+  man -t "$1" | ps2pdf - "$1.pdf"
+}

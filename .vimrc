@@ -49,13 +49,12 @@ set smartindent       " automatically indent new lines
 set foldenable        " enable folds
 set number            " enable line numbers
 set ruler             " enable column and line number display
-
-highlight OverLength ctermbg=blue ctermfg=white guibg=#592929
-"let columncolour OverLength /\%81v.\+/
-let &colorcolumn="80,".join(range(81,999),",")
+set cursorline        " 
+set colorcolumn=80
 "======================="
 "=== Keymapping ========"
 "======================="
+call togglebg#map("<F5>")
 " reload .vimrc faster
 noremap <leader>so :so ~/.vimrc<cr>
 " run current window in a python2 or python3 shell
@@ -84,22 +83,11 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "=== Other stuff ==="
 "==================="
 let g:Tex_DefaultTargetFormat = "pdf"
-let g:Tex_ViewRule_pdf        = "evince"
+let g:Tex_ViewRule_pdf        = "mupdf"
 
 "================="
 "=== Functions ==="
 "================="
-"function ToggleBackgroundColour ()
-"   if (&background == 'light')
-"      set background=dark
-"      echo "background -> dark"
-"   else
-"      set background=light
-"      echo "background -> light"
-"   endif
-"   colorscheme solarized
-"endfunction
-
 "here is a more exotic version of my original Kwbd script
 "delete the buffer; keep windows; create a scratch buffer if no buffers left
 function s:Kwbd(kwbdStage)

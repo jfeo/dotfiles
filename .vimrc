@@ -51,6 +51,8 @@ set number            " enable line numbers
 set ruler             " enable column and line number display
 set cursorline        " 
 set colorcolumn=80
+set mouse=a           " enable mouse
+
 "======================="
 "=== Keymapping ========"
 "======================="

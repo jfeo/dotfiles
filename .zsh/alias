@@ -1,5 +1,6 @@
 # shortcuts
 alias ..='cd ../'
+alias chrome='google-chrome-stable'
 
 alias spac='packer -S'
 alias sspac='packer -Ss'
@@ -13,9 +14,12 @@ alias printm1b='lpr -H print.diku.dk:631/version=1.1 -P m1b'
 
 alias rm='safe-rm'
 
+alias java='java -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
 # modified commands
 alias grep='grep --color=always'
 alias halt='systemctl poweroff'
 alias reboot='systemctl reboot'
 alias ls='ls --color=always'
 alias less='less -R'
+alias mosml='rlwrap mosml -P full'

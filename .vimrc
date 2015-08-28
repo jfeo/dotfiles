@@ -8,40 +8,41 @@ filetype off                  " required!
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle
-" required!
-Plugin 'gmarik/Vundle.vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'tpope/vim-commentary'
-"Plugin 'tpope/vim-surround'
-"Plugin 'ervandew/supertab'
-"Plugin 'scrooloose/syntastic'
-Plugin 'git://git.code.sf.indent/p/vim-latex/vim-latex'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'SirVer/ultisnips'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'junegunn/goyo.vim'
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+Plugin 'rdnetto/YCM-Generator'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'gmarik/Vundle.vim'      " plugin mangement
+Plugin 'Raimondi/delimitMate'   " insert matching quotes, braces, etc.
+Plugin 'bling/vim-airline'      " status bar
+Plugin 'tpope/vim-commentary'   " help for commenting
+Plugin 'scrooloose/syntastic'   " see compiler warnings in vim
+Plugin 'lervag/vim-latex'       " latex support
+Plugin 'tpope/vim-surround'     " surround selection with matching symbols
+Plugin 'ajh17/Spacegray.vim'    " colours
+Plugin 'SirVer/ultisnips'       " snippet-engine
+Plugin 'honza/vim-snippets'     " snippets 
+Plugin 'tpope/vim-fugitive'     " Use git from within vim
+" Syntax highlighting
+Plugin 'tikhomirov/vim-glsl'    " OpenGL Shading Language
+Plugin 'StanAngeloff/php.vim'   " Better PHP syntax coloring
+Plugin 'travitch/hasksyn'            " Haskell syntax
+Plugin 'vim-ruby/vim-ruby'           " Ruby syntax
+Plugin 'vim-scripts/vim-json-bundle' " JSON syntax
+Plugin 'xolox/vim-misc'  " miscellaneous vim autoload scripts
+Plugin 'xolox/vim-notes' " Note taking
+Plugin 'newclear/vim-pyclewn'
 
 call vundle#end()
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 "==================="
 "=== General ======="
 "==================="
-
-"set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
 filetype plugin indent on
 syntax enable
-set background=light
-let g:solarized_termcolors=256
-colorscheme solarized " colorscheme
+set background=dark
+color spacegray       " colorscheme
+set laststatus=2      " enable vim-airline statusbar
 set backspace=2       " delete newlines with backspace
-set expandtab         " indent with spaces
+" set expandtab         " indent with spaces
 set shiftwidth=2      " number of spaces to use when indenting
 set softtabstop=2     " number of spaces a tab counts for when inserting
 set tabstop=2         " number of spaces a tab counts for
@@ -49,105 +50,105 @@ set smartindent       " automatically indent new lines
 set foldenable        " enable folds
 set number            " enable line numbers
 set ruler             " enable column and line number display
-set cursorline        " 
-set colorcolumn=80
-set mouse=a           " enable mouse
-
+set hlsearch          " enable search highlighting
+au BufNewFile,BufRead *.fo setlocal ft=fasto
+" match ErrorMsg '\%>80v.\+'
 "======================="
 "=== Keymapping ========"
 "======================="
-call togglebg#map("<F5>")
+let mapleader=","
 " reload .vimrc faster
-noremap <leader>so :so ~/.vimrc<cr>
-" run current window in a python2 or python3 shell
-noremap <leader>cl :!clear<cr><cr>
-noremap <leader>p3 :!python %:p<cr> 
-noremap <leader>p2 :!python2 %:p<cr>
-" split horizontal
-"noremap <C-b> :split<cr>
-" split vertical
-"noremap <C-v> :vs<cr>
+noremap <leader>s :so ~/.vimrc<cr>
 " close current window
-noremap <C-l> :clo<cr>
+noremap <leader>l :clo<cr>
 " next buffer
-noremap <C-n> :bn<cr>
+noremap <leader>n :bn<cr>
 " previous buffer
-noremap <C-p> :bp<cr>
+noremap <leader>p :bp<cr>
 " delete buffer
-noremap <C-d> :Kwbd<cr>
-" Goyo mode
-noremap <C-f> :Goyo<cr>
+ noremap <leader>d :bd<cr>
+" Install plugins
+noremap <leader>i :PluginInstall!<cr>
+" Clear search
+noremap <leader>c :let @/ = ""<cr>
+" Create horizontal split window
+noremap <leader>h :split<cr>
+" Create vertical split window
+noremap <leader>v :vs<cr>
+" Resize horizontal split window
+noremap <Right> :vertical resize +5<cr>
+noremap <Left> :vertical resize -5<cr>
+" Resize vertical split window
+noremap <Down> :resize +5<cr>
+noremap <Up> :resize -5<cr>
+" Move correctly on wrapped lines
+noremap j gj
+noremap k gk
+
+noremap <leader>gs :C step<cr>
+"==================="
+"=== Plugin Setup==="
+"==================="
+
+"=== vim-latex ==="
+let g:Tex_DefaultTargetFormat = "pdf"     " vim-latex default target
+let g:Tex_ViewRule_pdf        = "mupdf"   " vim-latex default viewer
+
+"=== vim-airline ==="
+let g:airline_powerline_fonts = 1         " enable powerline fonts for vim-airline
+
+"=== ultisnips ==="
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:rehash256 = 1
 
-"==================="
-"=== Other stuff ==="
-"==================="
-let g:Tex_DefaultTargetFormat = "pdf"
-let g:Tex_ViewRule_pdf        = "mupdf"
+"=== YouCompleteMe ==="
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
 
-"================="
-"=== Functions ==="
-"================="
-"here is a more exotic version of my original Kwbd script
-"delete the buffer; keep windows; create a scratch buffer if no buffers left
-function s:Kwbd(kwbdStage)
-  if(a:kwbdStage == 1)
-    if(!buflisted(winbufnr(0)))
-      bd!
-      return
+" ====== HIGHLIGHT ====== "
+let s:activatedh = 0 
+function! ToggleH()
+    if s:activatedh == 0
+        let s:activatedh = 1 
+        match Search '\%>80v.\+'
+    else
+        let s:activatedh = 0 
+        match none
     endif
-    let s:kwbdBufNum = bufnr("%")
-    let s:kwbdWinNum = winnr()
-    windo call s:Kwbd(2)
-    execute s:kwbdWinNum . 'wincmd w'
-    let s:buflistedLeft = 0
-    let s:bufFinalJump = 0
-    let l:nBufs = bufnr("$")
-    let l:i = 1
-    while(l:i <= l:nBufs)
-      if(l:i != s:kwbdBufNum)
-        if(buflisted(l:i))
-          let s:buflistedLeft = s:buflistedLeft + 1
-        else
-          if(bufexists(l:i) && !strlen(bufname(l:i)) && !s:bufFinalJump)
-            let s:bufFinalJump = l:i
-          endif
-        endif
-      endif
-      let l:i = l:i + 1
-    endwhile
-    if(!s:buflistedLeft)
-      if(s:bufFinalJump)
-        windo if(buflisted(winbufnr(0))) | execute "b! " . s:bufFinalJump | endif
-      else
-        enew
-        let l:newBuf = bufnr("%")
-        windo if(buflisted(winbufnr(0))) | execute "b! " . l:newBuf | endif
-      endif
-      execute s:kwbdWinNum . 'wincmd w'
-    endif
-    if(buflisted(s:kwbdBufNum) || s:kwbdBufNum == bufnr("%"))
-      execute "bd! " . s:kwbdBufNum
-    endif
-    if(!s:buflistedLeft)
-      set buflisted
-      set bufhidden=delete
-      set buftype=
-      setlocal noswapfile
-    endif
-  else
-    if(bufnr("%") == s:kwbdBufNum)
-      let prevbufvar = bufnr("#")
-      if(prevbufvar > 0 && buflisted(prevbufvar) && prevbufvar != s:kwbdBufNum)
-        b #
-      else
-        bn
-      endif
-    endif
-  endif
 endfunction
 
-command! Kwbd call s:Kwbd(1)
-nnoremap <silent> <Plug>Kwbd :<C-d>Kwbd<CR>
+nnoremap <leader>q :call ToggleH()<CR>
+
+" ========================================
+" == Auto commands =======================
+" ========================================
+augroup highlightingLongLines
+  autocmd!
+  " autocmd FileType *        match ErrorMsg '\%>80v.\+'
+  autocmd FileType calendar match none
+  autocmd FileType conf     match none
+  autocmd FileType css      match none
+  autocmd FileType eruby    match none
+  autocmd FileType haskell  match none
+  autocmd FileType help     match none
+  autocmd FileType html     match none
+  autocmd FileType markdown match none
+  autocmd FileType mkd      match none
+  autocmd FileType objc     match none
+  autocmd FileType objcpp   match none
+  autocmd FileType php      match none
+  autocmd FileType plaintex match none
+  autocmd FileType qf       match none
+  autocmd FileType sh       match none
+  autocmd FileType sql      match none
+  autocmd FileType tex      match none
+  autocmd FileType text     match none
+  autocmd FileType unite    match none
+  autocmd FileType vimfiler match none
+  autocmd FileType xhtml    match none
+  autocmd FileType xml      match none
+augroup END

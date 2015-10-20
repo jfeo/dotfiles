@@ -40,8 +40,10 @@ Plugin 'nanotech/jellybeans.vim'
 call vundle#end()
 " }}}
 " Colors {{{
-colorscheme molokai       " bright colours!
-syntax enable             " enable syntax processing
+colorscheme molokai        " bright colours!
+syntax enable              " enable syntax processing
+set background=dark        " dark background is default, but we set it here for clarity
+let g:molokai_original = 1 " match original monokai background color
 " }}}
 " Spaces and tabs {{{
 set expandtab         " indent with spaces
@@ -66,8 +68,6 @@ set laststatus=2          " enable vim-airline statusbar
 " Searching {{{
 set incsearch             " search as characters are entered
 set hlsearch              " highlight search matches
-" clear search
-noremap <leader>c :let @/ = ""<cr>
 " }}}
 " Folding {{{
 set foldenable            " enable folds
@@ -78,7 +78,7 @@ nnoremap <space> za
 " }}}
 " Movement {{{
 " move correctly on wrapped lines
-noremap j gj              
+noremap j gj
 noremap k gk
 
 " move to beginning/end of line
@@ -126,6 +126,8 @@ noremap <leader>h :split<cr>
 noremap <leader>v :vs<cr>
 " toggle relative numbers
 nnoremap <leader>r :call ToggleNumber()<cr>
+" clear search
+noremap <leader>c :let @/ = ""<cr>
 " }}}
 " Plugin Settings {{{
 " CtrlP settings {{{
@@ -160,8 +162,7 @@ let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 " Auto commands {{{
 augroup configgroup
   autocmd!
-  autocmd BufWritePre *.c,*.cpp,*.h,*.hpp,*.php,*.py,*.js,*.txt,*.hs,*.java,*.md
-                \:call <SID>StripTrailingWhitespaces()
+  autocmd BufWritePre *.c,*.cpp,*.h,*.hpp,*.php,*.py,*.js,*.txt,*.hs,*.java,*.md,*.rb :call <SID>StripTrailingWhitespaces()
 augroup END
 " }}}
 " Backups {{{
@@ -180,8 +181,7 @@ function! ToggleNumber()
     else
         set relativenumber
     endif
-endfunc
-
+endfunction
 " strips trailing whitespace at the end of files. this
 " is called on buffer write in the autogroup above.
 function! <SID>StripTrailingWhitespaces()

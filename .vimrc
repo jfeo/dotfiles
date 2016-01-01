@@ -3,47 +3,44 @@
 " https://github.com/davidpdrsn/dotfiles
 " }}}
 " Plugins {{{ 
-set nocompatible              " be iMproved
-filetype off                  " required!
+call plug#begin('~/.config/nvim/plugins')
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'rdnetto/YCM-Generator'  " Autocompletion
-Plugin 'Valloric/YouCompleteMe' " Autocompletion
-Plugin 'sjl/gundo.vim'          " graphical view of undo tree
-Plugin 'kien/ctrlp.vim'         " Find stuff
-Plugin 'gmarik/Vundle.vim'      " plugin mangement
-Plugin 'Raimondi/delimitMate'   " insert matching quotes, braces, etc.
-Plugin 'bling/vim-airline'      " status bar
-Plugin 'tpope/vim-commentary'   " help for commenting
-Plugin 'scrooloose/syntastic'   " see compiler warnings in vim
-Plugin 'lervag/vimtex'          " latex support
-Plugin 'tpope/vim-surround'     " surround selection with matching symbols
-Plugin 'tomasr/molokai'         " colorscheme
-Plugin 'SirVer/ultisnips'       " snippet-engine
-Plugin 'honza/vim-snippets'     " snippets 
-Plugin 'tpope/vim-fugitive'     " Use git from within vim
-Plugin 'rking/ag.vim'           " The silver searcher
+Plug 'Valloric/YouCompleteMe' " Autocompletion
+Plug 'sjl/gundo.vim'          " graphical view of undo tree
+Plug 'kien/ctrlp.vim'         " Find stuff
+Plug 'gmarik/Vundle.vim'      " plugin mangement
+Plug 'Raimondi/delimitMate'   " insert matching quotes, braces, etc.
+Plug 'bling/vim-airline'      " status bar
+Plug 'tpope/vim-commentary'   " help for commenting
+Plug 'scrooloose/syntastic'   " see compiler warnings in vim
+Plug 'lervag/vimtex'          " latex support
+Plug 'tpope/vim-surround'     " surround selection with matching symbols
+Plug 'sjl/badwolf'            " colorscheme
+Plug 'SirVer/ultisnips'       " snippet-engine
+Plug 'honza/vim-snippets'     " snippets 
+Plug 'tpope/vim-fugitive'     " Use git from within vim
+Plug 'rking/ag.vim'           " The silver searcher
+Plug 'sukima/xmledit'         " XML editing functionality (tag closing, etc.)
+Plug 'chrisbra/DistractFree'  " Distraction free mode
+Plug 'kien/rainbow_parentheses.vim' " Match parentheses with colors
 " Syntax highlighting
-Plugin 'wannesm/wmnusmv.vim'         " NuSMV
-Plugin 'tikhomirov/vim-glsl'         " OpenGL Shading Language
-Plugin 'StanAngeloff/php.vim'        " PHP
-Plugin 'travitch/hasksyn'            " Haskell syntax
-Plugin 'vim-ruby/vim-ruby'           " Ruby syntax
-Plugin 'vim-scripts/vim-json-bundle' " JSON syntax
-Plugin 'xolox/vim-misc'  " miscellaneous vim autoload scripts
-Plugin 'xolox/vim-notes' " Note taking
-Plugin 'newclear/vim-pyclewn'
-Plugin 'nanotech/jellybeans.vim'
+Plug 'wannesm/wmnusmv.vim'         " NuSMV
+Plug 'tikhomirov/vim-glsl'         " OpenGL Shading Language
+Plug 'StanAngeloff/php.vim'        " PHP
+Plug 'travitch/hasksyn'            " Haskell syntax
+Plug 'vim-ruby/vim-ruby'           " Ruby syntax
+Plug 'vim-scripts/vim-json-bundle' " JSON syntax
+Plug 'xolox/vim-misc'  " miscellaneous vim autoload scripts
+Plug 'xolox/vim-notes' " Note taking
+Plug 'newclear/vim-pyclewn'
+Plug 'nanotech/jellybeans.vim'
+Plug 'jcfaria/Vim-R-plugin' " R language
 
-call vundle#end()
+call plug#end()
 " }}}
 " Colors {{{
-colorscheme molokai        " bright colours!
 syntax enable              " enable syntax processing
-set background=dark        " dark background is default, but we set it here for clarity
-let g:molokai_original = 1 " match original monokai background color
+colorscheme badwolf        " bright colours!
 " }}}
 " Spaces and tabs {{{
 set expandtab         " indent with spaces
@@ -64,6 +61,12 @@ set cursorline            " highlight current line
 set wildmenu              " visual autocomplete for command menu
 set lazyredraw            " redraw only when we need to
 set laststatus=2          " enable vim-airline statusbar
+set list
+set listchars=tab:▸\              " Char representing a tab
+set listchars+=extends:❯          " Char representing an extending line
+set listchars+=nbsp:␣             " Non breaking space
+set listchars+=precedes:❮         " Char representing an extending line in the other direction
+set listchars+=trail:·            " Show trailing spaces as dots
 " }}}
 " Searching {{{
 set incsearch             " search as characters are entered
@@ -107,9 +110,9 @@ nnoremap <leader>u :GundoToggle<cr>
 " open ag.vim
 nnoremap <leader>a :Ag 
 " reload .vimrc faster
-noremap <leader>sv :source ~/.vimrc<cr>
+noremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 " edit vimrc
-noremap <leader>ev :e ~/.vimrc<cr>
+noremap <leader>ev :e ~/.config/nvim/init.vim<cr>
 " close current window
 noremap <leader>l :clo<cr>
 " next buffer
@@ -119,7 +122,7 @@ noremap <leader>p :bp<cr>
 " delete buffer
  noremap <leader>d :bd<cr>
 " install plugin
-noremap <leader>i :PluginInstall!<cr>
+noremap <leader>i :PlugInstall!<cr>
 " create horizontal split window
 noremap <leader>h :split<cr>
 " create vertical split window
@@ -145,7 +148,7 @@ let g:airline_powerline_fonts = 1         " enable powerline fonts for vim-airli
 " }}}
 " ultisnips settings {{{
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<M-s>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:rehash256 = 1
@@ -157,12 +160,15 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 " }}}
 " syntastic settings {{{
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+let g:syntastic_java_javac_classpath = '/opt/android-sdk/platforms/android-23/*.jar'
 " }}}
 " }}}
 " Auto commands {{{
 augroup configgroup
   autocmd!
   autocmd BufWritePre *.c,*.cpp,*.h,*.hpp,*.php,*.py,*.js,*.txt,*.hs,*.java,*.md,*.rb :call <SID>StripTrailingWhitespaces()
+  autocmd FileType *.php,*.html,*.html,*.xml :
+  autocmd BufReadPost *.tex setlocal textwidth=80
 augroup END
 " }}}
 " Backups {{{
@@ -195,3 +201,4 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 " }}}
 " vim:foldmethod=marker:foldlevel=0
+"

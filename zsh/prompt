@@ -1,0 +1,20 @@
+# enabled colors in prompt
+setopt prompt_subst
+autoload -U colors && colors
+
+git_branch() {
+  local git_where=$((git symbolic-ref -q HEAD || git name-rev --name-only --no-undefined --always HEAD) 2> /dev/null)
+  echo " ${git_where#(refs/heads/|tags/)}"
+}
+
+function zle-line-init zle-keymap-select {
+    RPS1="%{$fg[red]%}$(git_branch)%{$reset_color%}"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+export KEYTIMEOUT=1
+
+PS1='%{$fg[cyan]%}%~%{$reset_color%} '
+RPS1=' %{$fg_bold[blue]%}INSERT%{$reset_color%}'

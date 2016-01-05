@@ -1,1 +1,3 @@
 [ -f ~/.zshrc ] && source ~/.zshrc && echo "Loading /home/feo/.zshrc"
+
+eval $(ssh-agent)

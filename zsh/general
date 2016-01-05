@@ -1,9 +1,15 @@
-echo ".zshrc loaded" >> ~/.log
 HISTFILE=/home/$USER/.cache/zsh_histfile
 HISTSIZE=1000
 SAVEHIST=10000
 
 bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
 
 zstyle :compinstall filename '/etc/zshrc'
 
@@ -13,14 +19,26 @@ promptinit
 setopt correct
 setopt histignoredups
 zstyle ':completion:*' menu select
+
 export EDITOR=vim
-export MANPAGER=most
+export BROWSER=chromium
+export TEXMFHOME=$HOME/.texmf
+
+source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # Setting path variable
-typeset -U path
-echo "Old path: $PATH" >> ~/.log
-path=($path /home/feo/bin /home/feo/desk /home/feo/games /home/feo/uni/ov/fasto/bin) && echo "New path: $PATH" >> ~/.log
+export PATH="$PATH:/home/feo/bin:/home/feo/desk:/home/feo/games:/home/feo/uni/ov/fasto/bin:/home/feo/uni/osm/bin"
+echo -e "Path: $PATH\ngeneral" >> ~/.log
+
+if [ -f "/usr/lib/libstderred.so" ]; then
+    export LD_PRELOAD="/usr/lib/libstderred.so"
+fi
+
+
 ## Keybindings
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
 bindkey "\e[1~" beginning-of-line
 bindkey "\e[4~" end-of-line
 bindkey "\e[5~" beginning-of-history

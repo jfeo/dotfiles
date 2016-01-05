@@ -1,7 +1,13 @@
+# replacements
+alias vim='nvim'
+alias vi='nvim'
 # shortcuts
 alias ..='cd ../'
 alias chrome='google-chrome-stable'
+alias ll='l -l'
 
+# pacman shortcuts
+alias pacman='pacman --color always'
 alias spac='packer -S'
 alias sspac='packer -Ss'
 alias rpac='sudo pacman -R'
@@ -10,16 +16,19 @@ alias sypac='sudo pacman -Sy'
 alias syupac='packer -Syu'
 alias qlpac='pacman -Ql'
 
-alias printm1b='lpr -H print.diku.dk:631/version=1.1 -P m1b'
-
 alias rm='safe-rm'
+alias reload='source ~/.zshrc' 
 
-alias java='java -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+#alias java='java -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 
 # modified commands
+alias mars='java -jar ~/dl/Mars4_5.jar'
 alias grep='grep --color=always'
+alias egrep='egrep --color=always'
 alias halt='systemctl poweroff'
 alias reboot='systemctl reboot'
-alias ls='ls --color=always'
+alias l='ls --color=always -h'
 alias less='less -R'
 alias mosml='rlwrap mosml -P full'
+
+alias gl='git log --all --decorate --graph --oneline'

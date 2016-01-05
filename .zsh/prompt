@@ -1,2 +1,0 @@
-PROMPT="%{$fg[yellow]%}> %{$reset_color%}"
-RPROMPT="%{$fg[green]%}%~%{$reset_color%}"

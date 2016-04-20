@@ -24,6 +24,7 @@ Plug 'sukima/xmledit'         " XML editing functionality (tag closing, etc.)
 Plug 'chrisbra/DistractFree'  " Distraction free mode
 Plug 'kien/rainbow_parentheses.vim' " Match parentheses with colors
 " Syntax highlighting
+Plug 'chriskempson/base16-vim'
 Plug 'wannesm/wmnusmv.vim'         " NuSMV
 Plug 'tikhomirov/vim-glsl'         " OpenGL Shading Language
 Plug 'StanAngeloff/php.vim'        " PHP
@@ -40,7 +41,11 @@ call plug#end()
 " }}}
 " Colors {{{
 syntax enable              " enable syntax processing
-colorscheme badwolf        " bright colours!
+if $TERM=='linux'
+  colorscheme base16-default        " bright colours!
+else
+  colorscheme badwolf        " bright colours!
+endif
 " }}}
 " Spaces and tabs {{{
 set expandtab         " indent with spaces
@@ -120,7 +125,9 @@ noremap <leader>n :bn<cr>
 " previous buffer
 noremap <leader>p :bp<cr>
 " delete buffer
- noremap <leader>d :bd<cr>
+noremap <leader>d :bd<cr>
+" CtrlP buffer selection
+noremap <leader>b :CtrlPBuffer<cr>
 " install plugin
 noremap <leader>i :PlugInstall!<cr>
 " create horizontal split window
@@ -131,6 +138,8 @@ noremap <leader>v :vs<cr>
 nnoremap <leader>r :call ToggleNumber()<cr>
 " clear search
 noremap <leader>c :let @/ = ""<cr>
+" terminal escape
+tnoremap <Esc>q <C-\><C-n>
 " }}}
 " Plugin Settings {{{
 " CtrlP settings {{{
@@ -161,6 +170,10 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 " syntastic settings {{{
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_java_javac_classpath = '/opt/android-sdk/platforms/android-23/*.jar'
+let g:syntastic_enable_signs = 0
+let g:syntastic_enable_balloons = 0
+let g:syntastic_enable_highlighting = 0
+let g:syntastic_mode_map = { "mode": "passive" }
 " }}}
 " }}}
 " Auto commands {{{
@@ -201,4 +214,3 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 " }}}
 " vim:foldmethod=marker:foldlevel=0
-"

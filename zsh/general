@@ -1,6 +1,7 @@
 HISTFILE=/home/$USER/.cache/zsh_histfile
 HISTSIZE=1000
 SAVEHIST=10000
+export MAIL=/var/spool/mail/jens
 
 bindkey -v
 
@@ -20,11 +21,9 @@ setopt correct
 setopt histignoredups
 zstyle ':completion:*' menu select
 
-export EDITOR=vim
+export EDITOR=nvim
 export BROWSER=chromium
 export TEXMFHOME=$HOME/.texmf
-
-source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # Setting path variable
 export PATH="$PATH:/home/feo/bin:/home/feo/desk:/home/feo/games:/home/feo/uni/ov/fasto/bin:/home/feo/uni/osm/bin"

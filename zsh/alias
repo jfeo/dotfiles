@@ -2,7 +2,7 @@
 alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
-alias ls='ls --color=always -h'
+alias ls='ls --color=always -lsah'
 
 # pacman shortcuts
 alias pac=pacaur

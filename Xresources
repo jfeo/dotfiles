@@ -10,14 +10,8 @@ URxvt.font:            xft:Droid Sans Mono for Powerline:pixelsize=14:antialias=
 URxvt.boldFont:        xft:Droid Sans Mono for Powerline:pixelsize=14:antialias=true:bold
 URxvt.italic:          xft:Droid Sans Mono for Powerline:pixelsize=14:antialias=true:italic
 
-! transparency
-/* URxvt.depth: 32 */
-
 ! colours
 #include "/home/feo/.config/colours/spacegray"
-! overwrite background colour with alpha value
-URxvt.background: #000000
-URxvt.shading: 20
 
 ! home and end keys
 URxvt*keysym.Home: \033[1~
@@ -28,9 +22,9 @@ URxvt.letterSpace: -1
 
 ! change font size
 URxvt.resize-font.smaller: C-minus
-URxvt.resize-font.bigger: C-plus
-URxvt.resize-font.reset: C-equal
-URxvt.resize-font.show: C-question
+URxvt.resize-font.bigger:  C-plus
+URxvt.resize-font.reset:   C-equal
+URxvt.resize-font.show:    C-question
 
 ! cursor
 Xcursor.theme:      Vanilla-DMZ

@@ -3,26 +3,14 @@ alias vim='nvim'
 alias vi='nvim'
 # shortcuts
 alias ..='cd ../'
-alias chrome='google-chrome-stable'
 alias ll='l -l'
 
 # pacman shortcuts
 alias pacman='pacman --color always'
-alias spac='packer -S'
-alias sspac='packer -Ss'
-alias rpac='sudo pacman -R'
-alias rspac='sudo pacman -Rs'
-alias sypac='sudo pacman -Sy'
-alias syupac='packer -Syu'
-alias qlpac='pacman -Ql'
 
-alias rm='safe-rm'
 alias reload='source ~/.zshrc' 
 
-#alias java='java -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
-
 # modified commands
-alias mars='java -jar ~/dl/Mars4_5.jar'
 alias grep='grep --color=always'
 alias egrep='egrep --color=always'
 alias halt='systemctl poweroff'

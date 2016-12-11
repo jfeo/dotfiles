@@ -3,12 +3,6 @@ HISTSIZE=1000
 SAVEHIST=10000
 export MAIL=/var/spool/mail/jens
 
-
-export PATH="$HOME/.dynamic-colors/bin:$PATH"
-source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
-
-dynamic-colors init
-
 bindkey -v
 
 bindkey '^P' up-history
@@ -28,11 +22,9 @@ setopt histignoredups
 zstyle ':completion:*' menu select
 
 export EDITOR=nvim
-export BROWSER=chromium
 export TEXMFHOME=$HOME/.texmf
 
 # Setting path variable
-export PATH="$PATH:/home/feo/bin:/home/feo/desk:/home/feo/games:/opt/android-sdk/tools:/home/feo/.cabal/bin"
 echo -e "Path: $PATH\ngeneral" >> ~/.log
 
 if [ -f "/usr/lib/libstderred.so" ]; then

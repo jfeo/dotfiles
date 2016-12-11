@@ -3,7 +3,7 @@
 # ~/.xinitrc
 #
 # Executed by startx (run your window manager from here)
-
+#
 if [ -d /etc/X11/xinit/xinitrc.d ]; then
   for f in /etc/X11/xinit/xinitrc.d/*; do
     [ -x "$f" ] && . "$f"
@@ -17,6 +17,9 @@ xrandr --auto
 setxkbmap dk &
 xrdb .Xresources
 
+# add custom keymapping
+xmodmap ~/.xmodmap
+
 # no beeps
 xset -b
 
@@ -27,4 +30,4 @@ xset fp rehash
 export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 
 # wm
-exec i3 -V >> ~/.i3/i3log 2>&1
+exec i3 -V >> ~/.i3/i3log

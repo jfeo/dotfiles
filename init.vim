@@ -2,7 +2,7 @@
 " http://dougblack.io/words/a-good-vimrc.html
 " https://github.com/davidpdrsn/dotfiles
 " }}}
-" Plugins {{{ 
+" Plugins {{{
 call plug#begin('~/.config/nvim/plugins')
 
 Plug 'Valloric/YouCompleteMe' " Autocompletion
@@ -15,15 +15,15 @@ Plug 'tpope/vim-commentary'   " help for commenting
 Plug 'scrooloose/syntastic'   " see compiler warnings in vim
 Plug 'lervag/vimtex'          " latex support
 Plug 'tpope/vim-surround'     " surround selection with matching symbols
-Plug 'sjl/badwolf'            " colorscheme
 Plug 'SirVer/ultisnips'       " snippet-engine
-Plug 'honza/vim-snippets'     " snippets 
+Plug 'honza/vim-snippets'     " snippets
 Plug 'tpope/vim-fugitive'     " Use git from within vim
 Plug 'rking/ag.vim'           " The silver searcher
 Plug 'sukima/xmledit'         " XML editing functionality (tag closing, etc.)
 Plug 'chrisbra/DistractFree'  " Distraction free mode
-Plug 'kien/rainbow_parentheses.vim' " Match parentheses with colors
+
 " Syntax highlighting
+Plug 'chriskempson/base16-vim'
 Plug 'wannesm/wmnusmv.vim'         " NuSMV
 Plug 'tikhomirov/vim-glsl'         " OpenGL Shading Language
 Plug 'StanAngeloff/php.vim'        " PHP
@@ -33,15 +33,31 @@ Plug 'vim-scripts/vim-json-bundle' " JSON syntax
 Plug 'xolox/vim-misc'  " miscellaneous vim autoload scripts
 Plug 'xolox/vim-notes' " Note taking
 Plug 'newclear/vim-pyclewn'
-Plug 'nanotech/jellybeans.vim'
 Plug 'jcfaria/Vim-R-plugin' " R language
+Plug 'jaxbot/semantic-highlight.vim'
 
 call plug#end()
 " }}}
 " Colors {{{
 syntax enable              " enable syntax processing
-colorscheme badwolf        " bright colours!
-" }}}
+
+" base16 color stuff
+let g:semanticTermColors = [28,1,2,3,4,5,6,7,25,9,10,34,12,13,14,15,16,125,124,19]
+let base16colorspace=256
+set t_Co=256
+
+set background=dark
+colorscheme base16-default-dark
+" select colorscheme from dynamic-colors selected color
+" let cs = split(readfile("/home/feo/.dynamic-colors/colorscheme")[0], '\.')
+" let mstr = matchstr(cs[1], 'dark')
+" if empty(mstr)
+"   set background=light
+" else
+"   set background=dark
+" endif
+" execute 'colorscheme ' . cs[0] . '-' . cs[1]
+"}}}
 " Spaces and tabs {{{
 set expandtab         " indent with spaces
 set shiftwidth=2      " number of spaces to use when indenting
@@ -76,21 +92,14 @@ set hlsearch              " highlight search matches
 set foldenable            " enable folds
 set foldlevelstart=10     " open most folds by default
 set foldnestmax=10        " 10 nested fold max
-" space 
+" space
 nnoremap <space> za
 " }}}
 " Movement {{{
 " move correctly on wrapped lines
-noremap j gj
-noremap k gk
-
-" move to beginning/end of line
-nnoremap B ^
-nnoremap E $
-
-" $/^ doesn't do anything
-nnoremap $ <nop>
-nnoremap ^ <nop>
+" while allowing counted g/j
+noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
 " highlight last inserted text
 nnoremap gV `[v`]
@@ -108,7 +117,7 @@ let mapleader=","          " leader is comma
 " toggle gundo
 nnoremap <leader>u :GundoToggle<cr>
 " open ag.vim
-nnoremap <leader>a :Ag 
+nnoremap <leader>a :Ag
 " reload .vimrc faster
 noremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 " edit vimrc
@@ -120,7 +129,9 @@ noremap <leader>n :bn<cr>
 " previous buffer
 noremap <leader>p :bp<cr>
 " delete buffer
- noremap <leader>d :bd<cr>
+noremap <leader>d :bd<cr>
+" CtrlP buffer selection
+noremap <leader>b :CtrlPBuffer<cr>
 " install plugin
 noremap <leader>i :PlugInstall!<cr>
 " create horizontal split window
@@ -131,6 +142,8 @@ noremap <leader>v :vs<cr>
 nnoremap <leader>r :call ToggleNumber()<cr>
 " clear search
 noremap <leader>c :let @/ = ""<cr>
+" terminal escape
+tnoremap <Esc>q <C-\><C-n>
 " }}}
 " Plugin Settings {{{
 " CtrlP settings {{{
@@ -139,7 +152,7 @@ let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 " }}}
-" vim-latex settings {{{
+" vimtex settings {{{
 let g:vimtex_fold_enabledA = 0
 let g:vimtex_view_method   = "mupdf"
 " }}}
@@ -154,13 +167,26 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:rehash256 = 1
 " }}}
 " YouCompleteMe settings {{{
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugins/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 " }}}
 " syntastic settings {{{
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-let g:syntastic_java_javac_classpath = '/opt/android-sdk/platforms/android-23/*.jar'
+" let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+" let g:syntastic_java_javac_classpath = '/opt/android-sdk/platforms/android-23/*.jar'
+" let g:syntastic_enable_signs = 0
+" let g:syntastic_enable_balloons = 0
+" let g:syntastic_enable_highlighting = 0
+" let g:syntastic_mode_map = { "mode": "passive" }
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 " }}}
 " }}}
 " Auto commands {{{
@@ -201,4 +227,3 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 " }}}
 " vim:foldmethod=marker:foldlevel=0
-"

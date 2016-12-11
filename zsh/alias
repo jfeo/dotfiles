@@ -1,21 +1,21 @@
-# replacements
-alias vim='nvim'
-alias vi='nvim'
 # shortcuts
 alias ..='cd ../'
-alias ll='l -l'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias ls='ls --color=always -lsah'
 
 # pacman shortcuts
-alias pacman='pacman --color always'
+alias pac=pacaur
 
+# alias rm='safe-rm'
 alias reload='source ~/.zshrc' 
+alias o='xdg-open'
 
 # modified commands
 alias grep='grep --color=always'
 alias egrep='egrep --color=always'
 alias halt='systemctl poweroff'
 alias reboot='systemctl reboot'
-alias l='ls --color=always -h'
 alias less='less -R'
 alias mosml='rlwrap mosml -P full'
 

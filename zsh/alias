@@ -4,9 +4,6 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias ls='ls --color=always -lsah'
 
-# pacman shortcuts
-alias pac=pacaur
-
 # alias rm='safe-rm'
 alias reload='source ~/.zshrc' 
 alias o='xdg-open'

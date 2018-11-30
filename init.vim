@@ -5,15 +5,22 @@
 " Plugins {{{
 call plug#begin('~/.config/nvim/plugins')
 
-Plug 'Valloric/YouCompleteMe' " Autocompletion
+" Plug 'Valloric/YouCompleteMe' " Autocompletion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/context_filetype.vim'
+Plug 'Shougo/neoinclude.vim'
+Plug 'zchee/deoplete-jedi'
+Plug 'artur-shaik/vim-javacomplete2'
+
+Plug 'c0r73x/neotags.nvim'    " Tags for syntax highlighting (ie. class names, etc)
+
 Plug 'sjl/gundo.vim'          " graphical view of undo tree
 Plug 'kien/ctrlp.vim'         " Find stuff
 Plug 'gmarik/Vundle.vim'      " plugin mangement
 Plug 'Raimondi/delimitMate'   " insert matching quotes, braces, etc.
 Plug 'bling/vim-airline'      " status bar
 Plug 'tpope/vim-commentary'   " help for commenting
-Plug 'scrooloose/syntastic'   " see compiler warnings in vim
-Plug 'lervag/vimtex'          " latex support
+" Plug 'scrooloose/syntastic'   " see compiler warnings in vim
 Plug 'tpope/vim-surround'     " surround selection with matching symbols
 Plug 'SirVer/ultisnips'       " snippet-engine
 Plug 'honza/vim-snippets'     " snippets
@@ -21,8 +28,10 @@ Plug 'tpope/vim-fugitive'     " Use git from within vim
 Plug 'rking/ag.vim'           " The silver searcher
 Plug 'sukima/xmledit'         " XML editing functionality (tag closing, etc.)
 Plug 'chrisbra/DistractFree'  " Distraction free mode
+Plug 'Floobits/floobits-neovim'
 
 " Syntax highlighting
+Plug 'Rykka/riv.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'wannesm/wmnusmv.vim'         " NuSMV
 Plug 'tikhomirov/vim-glsl'         " OpenGL Shading Language
@@ -59,10 +68,9 @@ colorscheme base16-default-dark
 " execute 'colorscheme ' . cs[0] . '-' . cs[1]
 "}}}
 " Spaces and tabs {{{
-set expandtab         " indent with spaces
-set shiftwidth=2      " number of spaces to use when indenting
-set softtabstop=2     " number of spaces a tab counts for when inserting
-set tabstop=2         " number of spaces a tab counts for
+set shiftwidth=4      " number of spaces to use when indenting
+set softtabstop=4     " number of spaces a tab counts for when inserting
+set tabstop=4         " number of spaces a tab counts for
 set smartindent       " automatically indent new lines
 set backspace=2       " delete newlines with backspace
 set modelines=1       " last line in file can be mode line
@@ -146,6 +154,12 @@ noremap <leader>c :let @/ = ""<cr>
 tnoremap <Esc>q <C-\><C-n>
 " }}}
 " Plugin Settings {{{
+" neotags {{{
+let g:neotags_enabled=1
+" }}}
+" deoplete.settings {{{
+let g:deoplete#enable_at_startup = 1
+"}}}
 " CtrlP settings {{{
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
@@ -153,8 +167,10 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 " }}}
 " vimtex settings {{{
-let g:vimtex_fold_enabledA = 0
-let g:vimtex_view_method   = "mupdf"
+let g:vimtex_fold_enabledA   = 0
+let g:vimtex_view_method     = 'mupdf'
+let g:vimtex_latexmk_options = '-pdf -interaction=nonstopmode -synctex=1 -shell-escape'
+let g:latex_indent_enabled       = 0
 " }}}
 " vim-airline settings {{{
 let g:airline_powerline_fonts = 1         " enable powerline fonts for vim-airline
@@ -171,6 +187,7 @@ let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugins/YouCompleteMe/third_pa
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_python_binary_path = 'python'
 " }}}
 " syntastic settings {{{
 " let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
@@ -194,8 +211,10 @@ augroup configgroup
   autocmd!
   autocmd BufWritePre *.c,*.cpp,*.h,*.hpp,*.php,*.py,*.js,*.txt,*.hs,*.java,*.md,*.rb :call <SID>StripTrailingWhitespaces()
   autocmd FileType *.php,*.html,*.html,*.xml :
-  autocmd BufReadPost *.tex setlocal textwidth=80
+  " autocmd BufReadPost *.tex setlocal textwidth=80
 augroup END
+au BufNewFile,BufRead *.fut set filetype=futhark
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " }}}
 " Backups {{{
 set backup

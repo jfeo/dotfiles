@@ -32,7 +32,7 @@ export BROWSER=chromium
 export TEXMFHOME=$HOME/.texmf
 
 # Setting path variable
-export PATH="$PATH:/home/feo/bin:/home/feo/desk:/home/feo/games:/opt/android-sdk/tools:/home/feo/.cabal/bin"
+export PATH="$PATH:/home/feo/bin:/home/feo/.local/bin:/home/feo/desk:/home/feo/games:/opt/android-sdk/tools:/home/feo/.cabal/bin"
 echo -e "Path: $PATH\ngeneral" >> ~/.log
 
 if [ -f "/usr/lib/libstderred.so" ]; then

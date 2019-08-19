@@ -1,4 +1,4 @@
-colorscheme base16
+colorscheme base16-feomod
 
 # plugins
 source ~/.config/kak/plugins/plug.kak/rc/plug.kak
@@ -8,6 +8,40 @@ plug 'andreyorst/powerline.kak' %{
     }
 }
 
+plug "ul/kak-lsp" do %{
+    cargo build --release --locked
+    cargo install --force
+} config %{
+    set-option global lsp_diagnostic_line_error_sign '║'
+    set-option global lsp_diagnostic_line_warning_sign '┊'
+
+    define-command ne -docstring 'go to next error/warning from lsp' %{ lsp-find-error --include-warnings }
+    define-command pe -docstring 'go to previous error/warning from lsp' %{ lsp-find-error --previous --include-warnings }
+    define-command ee -docstring 'go to current error/warning from lsp' %{ lsp-find-error --include-warnings; lsp-find-error --previous --include-warnings }
+
+    define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
+
+    hook global WinSetOption filetype=(c|cpp|rust) %{
+        set-option window lsp_auto_highlight_references true
+        set-option window lsp_hover_anchor false
+        lsp-auto-hover-enable
+        lsp-enable-window
+    }
+
+    hook global WinSetOption filetype=(rust) %{
+        set-option window lsp_server_configuration rust.clippy_preference="on"
+    }
+
+    hook global WinSetOption filetype=rust %{
+        hook window BufWritePre .* %{
+            evaluate-commands %sh{
+                test -f rustfmt.toml && printf lsp-formatting-sync
+            }
+        }
+    }
+
+    hook global KakEnd .* lsp-exit
+}
 
 hook global WinCreate .* %{
 	# add brackets highlighting
@@ -28,13 +62,6 @@ hook global NormalKey y|d|c %{ nop %sh{
     printf %s "$kak_main_reg_dquote" | xsel --input --clipboard
 }}
 
-# python options
-hook global WinSetOption filetype=python %{
-    set global lintcmd kak_pylint
-    set global formatcmd yapf
-    lint-enable
-}
-
 # comment lines
 map global normal <a-m> %{_:try comment-block catch comment-line<ret>}
 
@@ -46,13 +73,9 @@ map -docstring "x11 clipboard paste after selection" global user p '<a-!>xsel --
 map -docstring "next buffer" global user n ':buffer-next<ret>'
 map -docstring "previous buffer" global user b ':buffer-previous<ret>'
 map -docstring "open buffer list" global user t ':buffer '
-
-# setup language server protocol
-eval %sh{kak-lsp --kakoune -s $kak_session}
+map -docstring "lsp commands" global user l ':enter-user-mode lsp<ret>'
 
 # options
-#set-option global modelinefmt '%sh{date}'
-set-option global scrolloff 10,10 # keep space around cursor
 set-option global ui_options ncurses_assistant=off # disable clippy
 
 # indentation

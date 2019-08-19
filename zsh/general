@@ -5,6 +5,7 @@ export MAIL=/var/spool/mail/jens
 
 
 export PATH="$HOME/.dynamic-colors/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
 
 dynamic-colors init

@@ -13,6 +13,7 @@ fi
 
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
+xrandr --dpi 96
 
 setxkbmap dk &
 xrdb .Xresources

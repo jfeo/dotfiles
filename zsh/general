@@ -1,17 +1,8 @@
 HISTFILE=/home/$USER/.cache/zsh_histfile
 HISTSIZE=1000
 SAVEHIST=10000
-export MAIL=/var/spool/mail/jens
-
-
-export PATH="$HOME/.dynamic-colors/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-source $HOME/.dynamic-colors/completions/dynamic-colors.zsh
-
-dynamic-colors init
 
 bindkey -v
-
 bindkey '^P' up-history
 bindkey '^N' down-history
 bindkey '^?' backward-delete-char
@@ -33,8 +24,7 @@ export BROWSER=chromium
 export TEXMFHOME=$HOME/.texmf
 
 # Setting path variable
-export PATH="$PATH:/home/feo/bin:/home/feo/.local/bin:/home/feo/desk:/home/feo/games:/opt/android-sdk/tools:/home/feo/.cabal/bin"
-echo -e "Path: $PATH\ngeneral" >> ~/.log
+export PATH="$PATH:/home/feo/bin:/home/feo/.local/bin:/home/feo/games"
 
 if [ -f "/usr/lib/libstderred.so" ]; then
     export LD_PRELOAD="/usr/lib/libstderred.so"

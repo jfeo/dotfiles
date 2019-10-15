@@ -15,6 +15,5 @@ alias egrep='egrep --color=always'
 alias halt='systemctl poweroff'
 alias reboot='systemctl reboot'
 alias less='less -R'
-alias mosml='rlwrap mosml -P full'
 
 alias gl='git log --all --decorate --graph --oneline'

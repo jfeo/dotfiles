@@ -13,10 +13,8 @@ URxvt.italic:          xft:Iosevka:pixelsize=16:antialias=true:regular oblique
 ! Plugins
 URxvt.perl-ext-common: resize-font
 
-xterm*dynamicColors: true
-urxvt*dynamicColors: on
 URxvt.transparent:   true
-URxvt.shading:       20
+URxvt.shading:       30
 
 ! home and end keys
 URxvt*keysym.Home: \033[1~
@@ -33,8 +31,6 @@ Xcursor.theme:      Vanilla-DMZ
 Xcursor.theme_core: true
 Xcursor.size:       0
 
-*background: #000000
-
 ! do not scroll with output
 URxvt*scrollTtyOutput: false
 
@@ -43,3 +39,5 @@ URxvt*scrollWithBuffer: true
 
 ! scroll back to the bottom on keypress
 URxvt*scrollTtyKeypress: true
+
+#include "/usr/share/base16/xresources/base16-default.dark.256.xresources"

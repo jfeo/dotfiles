@@ -2,6 +2,7 @@ colorscheme base16-feomod
 
 # plugins
 source ~/.config/kak/plugins/plug.kak/rc/plug.kak
+plug "andreyorst/plug.kak" noload
 plug 'andreyorst/powerline.kak' %{
     hook -once global WinCreate .* %{
         powerline-format git bufname filetype mode_info line_column position
@@ -10,7 +11,7 @@ plug 'andreyorst/powerline.kak' %{
 
 plug "ul/kak-lsp" do %{
     cargo build --release --locked
-    cargo install --force
+    cargo install --force --path .
 } config %{
     set-option global lsp_diagnostic_line_error_sign '║'
     set-option global lsp_diagnostic_line_warning_sign '┊'
@@ -21,7 +22,7 @@ plug "ul/kak-lsp" do %{
 
     define-command lsp-restart -docstring 'restart lsp server' %{ lsp-stop; lsp-start }
 
-    hook global WinSetOption filetype=(c|cpp|rust) %{
+    hook global WinSetOption filetype=(c|cpp|rust|typescript|javascript|python) %{
         set-option window lsp_auto_highlight_references true
         set-option window lsp_hover_anchor false
         lsp-auto-hover-enable
@@ -74,6 +75,8 @@ map -docstring "next buffer" global user n ':buffer-next<ret>'
 map -docstring "previous buffer" global user b ':buffer-previous<ret>'
 map -docstring "open buffer list" global user t ':buffer '
 map -docstring "lsp commands" global user l ':enter-user-mode lsp<ret>'
+map -docstring "split horizontally" global user \" ':tmux-terminal-horizontal kak -c %val{session}<ret>'
+map -docstring "split vertically" global user \% ':tmux-terminal-vertical kak -c %val{session}<ret>'
 
 # options
 set-option global ui_options ncurses_assistant=off # disable clippy
